@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import { Albums } from './components/Albums';
+import { AlbumPhotos } from './components/AlbumPhotos';
+import { NoMatch } from './components/NoMatch';
+import { Photo } from './components/Photo';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App flex justify-center font-family: font-roboto">
+      <div className='container md:w-[1280px] mt-12 p-4'>
+        <div className='flex justify-center w-full mb-4'>
+          <Link to={'/'}>
+            <h1 className='text-2xl md:text-4xl font-bold bg-slate-400 text-white px-4 py-2 md:px-8 md:py-4'>LOGO</h1>
+          </Link>
+        </div>
+        <Routes>
+          <Route path='/' element={<Albums />} />
+          <Route path='album/:albumId' element={<AlbumPhotos />}>
+            <Route path=':albumTitle' element={<Photo />} />
+          </Route>
+          <Route path='*' element={<NoMatch />} />
+        </Routes>
+      </div>
+    </div >
   );
 }
 
